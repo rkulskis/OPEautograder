@@ -1,0 +1,76 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: autograderv2-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: autograderv2
+  template:
+    metadata:
+      annotations:
+        alpha.image.policy.openshift.io/resolve-names: '*'
+      labels:
+        app: autograderv2
+    spec:
+      volumes:
+      - name: app
+        emptyDir: {}
+        
+      initContainers:
+      - name: get-assignments
+        image: docker.io/bitnami/git:latest
+        securityContext:
+          allowPrivilegeEscalation: true
+        env:
+        - name: HOME
+          value: /home/init
+        - name: autograderv2_DEPLOY_KEY
+          valueFrom:
+            secretKeyRef:
+              name: autograderv2-deploy-key
+              key: ssh-privatekey
+        envFrom:
+        - secretRef:
+            name: autograderv2-config   
+              
+
+        command:
+        - sh
+        - -c
+        - |
+          cd $HOME
+          mkdir ~/.ssh
+          touch ~/.ssh/known_hosts
+          echo "${autograderv2_DEPLOY_KEY}\n" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          GIT_SSH_COMMAND="ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_ed25519" git clone ${autograderv2_REPO_SSH_URL}
+          rm -rf ~/.ssh/id_ed25519
+
+        volumeMounts:
+        - name: app
+          mountPath: /home/init
+
+      containers:
+      - name: autograderv2-is
+        image: autograderv2-is:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        env:
+        envFrom:
+        - secretRef:
+            name: autograderv2-config
+        resources:
+          limits:
+            cpu: 100m
+            memory: 100Mi
+          requests:
+            cpu: 50m
+            memory: 50Mi
+            
+        volumeMounts:
+        - name: app
+          mountPath: /app/assignments

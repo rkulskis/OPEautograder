@@ -1,0 +1,19 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: autograderv2-service
+  namespace: ece440spring2024-619f12
+spec:
+  clusterIP: 172.30.164.9
+  ipFamilies:
+    - IPv4
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+  internalTrafficPolicy: Cluster
+  clusterIPs:
+    - 172.30.164.9
+  type: ClusterIP
+  selector:
+    app: autograderv2

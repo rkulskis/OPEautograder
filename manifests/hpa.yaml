@@ -1,0 +1,18 @@
+kind: HorizontalPodAutoscaler
+apiVersion: autoscaling/v2
+metadata:
+  name: autograderv2-hpa
+spec:
+  scaleTargetRef:
+    kind: Deployment
+    name: autograderv2-deployment
+    apiVersion: apps/v1
+  minReplicas: 1
+  maxReplicas: 4
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 40

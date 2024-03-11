@@ -1,0 +1,25 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+commonLabels:
+  app: autograderv2
+
+resources:
+  - deployment.yaml
+  - service.yaml
+  - route.yaml
+  - hpa.yaml
+  - image-stream.yaml
+  - build-config.yaml
+
+secretGenerator:
+  - name: autograderv2-config
+    envs:
+      - autograderv2.env
+    options:
+      disableNameSuffixHash: true
+  - name: autograderv2-deploy-key
+    type: kubernetes.io/ssh-auth
+    files:
+    - ssh-privatekey
+    options:
+      disableNameSuffixHash: true

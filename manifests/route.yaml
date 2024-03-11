@@ -1,0 +1,19 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: autograderv2-route
+  namespace: ece440spring2024-619f12
+  annotations:
+    haproxy.router.openshift.io/timeout: 10m
+    openshift.io/host.generated: 'true'
+spec:
+  host: autograderv2-service-ece440spring2024-619f12.apps.shift.nerc.mghpcc.org
+  to:
+    kind: Service
+    name: autograderv2-service
+    weight: 100
+  port:
+    targetPort: 8080
+  tls:
+    termination: edge
+  wildcardPolicy: None
