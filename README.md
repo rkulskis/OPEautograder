@@ -22,9 +22,9 @@ This is the directory structure of our tests in our private autograder repo, whi
 ```
 .
 ├── 2024
-│   ├── **{assignment_name}**
+│   ├── {assignment_name}
 │   │   ├── Makefile
-│   │   ├── **autograder**
+│   │   ├── autograder
 │   │   │   ├── Dockerfile
 │   │   │   ├── README.md
 │   │   │   ├── bundle.sh
@@ -34,7 +34,7 @@ This is the directory structure of our tests in our private autograder repo, whi
 │   │   │   ├── setup.sh
 │   │   │   ├── test_bundle.sh
 │   │   │   └── tests -> ../tests
-│   │   └── **tests**
+│   │   └── tests
 │   │       ├── README.md
 │   │       ├── __init__.py
 │   │       ├── test0.c
