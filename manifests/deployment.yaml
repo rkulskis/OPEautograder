@@ -47,6 +47,7 @@ spec:
           chmod 600 ~/.ssh/id_ed25519
           GIT_SSH_COMMAND="ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_ed25519" git clone ${autograderv2_REPO_SSH_URL}
           rm -rf ~/.ssh/id_ed25519
+          find . -type d -name 'solutions' -exec rm -rf {} +
 
         volumeMounts:
         - name: app

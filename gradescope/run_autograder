@@ -3,7 +3,7 @@
 LINK="https://autograderv2-service-ece440spring2024-619f12.apps.shift.nerc.mghpcc.org"
 USERNAME="my_username"
 PASSWORD="my_password"
-ASSIGNMENT_NAME=challenge-threads
+ASSIGNMENT_NAME="challenge-threads"
 
 cd /autograder/submission
 zip -r submission.zip . -x run_autograder README.md autograder.zip setup.sh run_autograder zip.sh
