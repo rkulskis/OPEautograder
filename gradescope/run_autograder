@@ -8,4 +8,4 @@ ASSIGNMENT_NAME=challenge-threads
 cd /autograder/submission
 zip -r submission.zip . -x run_autograder README.md autograder.zip setup.sh run_autograder zip.sh
 
-curl --user "$USERNAME:$PASSWORD" -X POST -F "submission.zip=@submission.zip" "assignment_name=$ASSIGNMENT_NAME" $LINK > /autograder/results/results.json
+curl --user "$USERNAME:$PASSWORD" -X POST -F "submission.zip=@submission.zip" --form "assignment_name=$ASSIGNMENT_NAME" $LINK > /autograder/results/results.json
