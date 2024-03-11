@@ -15,7 +15,5 @@ spec:
   source:
     type: Git
     git:
-      uri: 'git@github.com:OpenOSOrg/NERCautograder.git'
+      uri: git@github.com:rkulskis/OPEautograder.git
     contextDir: nerc
-    sourceSecret:
-      name: autograderv2-deploy-key

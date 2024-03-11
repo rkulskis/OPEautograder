@@ -1,4 +1,4 @@
-# NERC Autograder
+# OPE Autograder
 
 This is a flask application that receives homework submissions via a `POST` request, runs some tests, and sends the results back to the client. It is generic and easily adaptable to the gradescope framework. The service is coupled loosely such that you only need to run the build configuration once. If you change tests to your autograder, simply [restart the rollout](#restart-rollout) and the initContainer will pull the newest version of the tests from your GitHub repo.
 
