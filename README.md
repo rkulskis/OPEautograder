@@ -19,6 +19,7 @@ Also, you need to generate a [deploy key](https://docs.github.com/en/authenticat
 
 This is the directory structure of our tests in our private autograder repo, which is used in [`setup_thread.sh`](nerc/setup_thread.sh). You can use a different path, just make sure to configure it properly in the `setup_threads` shell script.
 
+```
 .
 ├── 2024
 │   ├── **{assignment_name}**
@@ -38,6 +39,7 @@ This is the directory structure of our tests in our private autograder repo, whi
 │   │       ├── __init__.py
 │   │       ├── test0.c
 │   │       └── test1.c
+```
 
 ## Deploying the application
 After following the configuration steps, you can deploy the manifests into your current namespace by running:
